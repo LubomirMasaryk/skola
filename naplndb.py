@@ -16,7 +16,7 @@ for rocnik in range(1, 5):
         Trieda.objects.create(nazov=f"{rocnik}.{pismeno}")
 
 for meno in ["Ján","Adam","Jozef","Tomáš"]:
-    for priezvisko in ["Mrkvička","šarlina","Šutek","Trnka"]:
+    for priezvisko in ["Mrkvička","Šarlina","Šutek","Trnka"]:
         Student.objects.create(meno=meno, priezvisko=priezvisko)
 
 for meno in ["Ján","Adam","Jozef","Tomáš"]:
