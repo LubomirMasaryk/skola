@@ -1,0 +1,57 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="sk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static ' ' %}">
+    <title>Knižnica</title>
+</head>
+<body>
+    <div>
+        {% if knihy %}
+        <h1>Knihy:</h1>
+        <ul>
+            {% for kniha in knihy %}
+                <li>{{ kniha.nazov }} ({{ kniha.rok_vydania }})</li>
+            {% endfor %}
+        </ul>
+        {% endif %}
+    </div>
+
+
+    <div>
+        {% if autori %}
+        <h1>Autori:</h1>
+        <ul>
+            {% for autor in autori %}
+                <li>{{ autor.meno }} {{ autor.priezvisko }}</li>
+            {% endfor %}
+        </ul>
+        {% endif %}
+    </div>
+
+
+    <div>
+        {% if miesta %}
+        <h1>Miesta:</h1>
+        <ul>
+            {% for miesto in miesta %}
+                <li>{{ miesto.nazov }}</li>
+            {% endfor %}
+        </ul>
+        {% endif %}
+    </div>
+
+
+    <div>
+        {% if vydavatelia %}
+        <h1>Vydavatelia:</h1>
+        <ul>
+            {% for vydavatel in vydavatelia %}
+                <li>{{ vydavatel.nazov }}</li>
+            {% endfor %}
+        </ul>
+        {% endif %}
+    </div>
+</html>

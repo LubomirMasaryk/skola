@@ -1,4 +1,4 @@
-1. Štruktúra projektu:
+ 1. Štruktúra projektu:
  /mysite  hlavný priečinok celého projektu
          - settings.py - nastavenia celeho projektu (región, zaregistrovanie aplikácie,...)
          - urls.py - router pre celý projekt

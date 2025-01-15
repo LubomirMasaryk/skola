@@ -1,0 +1,110 @@
+1.Inštalácia Django do python:
+  pip install Django
+  pip list :overenie
+      Package  Version
+      -------- -------
+      asgiref  3.8.1
+      Django   5.1.1
+      pip      24.2
+      sqlparse 0.5.1
+      tzdata   2024.2
+
+2.Vytvorenie django projektu:
+    django-admin startproject nazov_projektu .
+
+3.Nastavenie slovenčiny:
+    mysite/settings.py
+    LANGUAGE_CODE = 'en-us'
+    TIME_ZONE = 'Europe/Bratislava'
+
+4.Spustenie vývojového servera:
+    python manage.py runserver
+
+5.vytvorenie aplikácie v projekte:
+    python manage.py startapp nazov_aplikacie
+
+6.Zaregistrovanie aplikacie do projektu (mysite/settings.py)
+    INSTALLED_APPS = [
+      'django.contrib.admin',
+      'django.contrib.auth',
+      'django.contrib.contenttypes',
+      'django.contrib.sessions',
+      'django.contrib.messages',
+      'django.contrib.staticfiles',
+      'skuska',
+    ]
+
+7.Vytvoriť jednoduché views (skuska/views.py)
+    from django.shortcuts import render
+    from django.http import HttpResponse
+
+    def index(request):
+       return HttpResponse('Hello world!')
+
+8.Vytvoriť url pattern:
+    8.1 mysite/urls.py
+         from django.contrib import admin
+         from django.urls import path, include
+    
+         urlpatterns = [
+           path('admin/', admin.site.urls),
+           path('skuska/', include('skuska.urls')),
+         ]
+
+     8.2 
+    -vytvorit subor urls.py v skuska (priečinok aplikácie)
+    from django.urls import path
+    from . import views 
+
+    urlpatterns = [
+    path('', views.index, name ='index'),
+    ]
+
+9. Template
+9.1 Vytvoriť v aplikácií priečinok templates v nom priečinok nazov_aplikacie (templates/nazov_aplikacie)  a v ňom nejaký html súbor(napr: index.html)
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Kalkulacka</title>
+    </head>
+    <body>
+        <h1>Kalkulačka<h1>
+        <form method="post">
+            {% csrf_token %}
+            <input type="text" name="a">
+            <select name = "operator">
+                <option value = "+">+</option>
+                <option value = "-">-</option>
+                <option value = "*">*</option>
+                <option value = "/">/</option>
+            </select>
+            <input type="text" name="b">
+            <input type="submit">
+        </form>
+        <h2>{{vysledok}}</h2>
+    </body>
+    </html>
+
+9.2 upraviť views.py
+  from django.shortcuts import render
+  from django.http import HttpResponse
+  
+   def index(request):
+      if request.method == "GET":
+           vysledok = 0
+      if request.method == "POST":
+           a = int(request.POST["a"])
+           b = int(request.POST["b"])
+           operator = request.POST["operator"]
+           if operator =="+":
+                vysledok = a + b
+           elif operator =="-":
+                vysledok = a - b
+           elif operator =="*":
+                vysledok = a * b 
+           else:
+                 vysledok = a / b  
+  
+      return render(request, 'skuska/index.html', dict(vysledok=vysledok))
