@@ -5,10 +5,10 @@
 }
 
 body {
-    font-family: Arial, sans-serif;
-    background-color: white;
+    font-family: 'Roboto', sans-serif; 
+    background-color: #f4f4f4; 
     color: #333;
-    line-height: 1.5;
+    line-height: 1.1;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -22,7 +22,7 @@ body {
 }
 
 h1 {
-    color: aqua;
+    color: #007bff; 
     margin-bottom: 15px;
 }
 
@@ -35,9 +35,14 @@ ul {
 
 li {
     margin-right: 20px;
+    transition: background-color 0.3s; 
 }
+
+li:hover {
+    background-color: #e7f1ff; 
+}
+
 div {
-    border: #333 1px solid;
     padding: 15px;
     margin-bottom: 15px;
 }

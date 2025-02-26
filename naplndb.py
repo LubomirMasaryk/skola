@@ -12,14 +12,30 @@ Ucitel.objects.all().delete()
 
 # Trieda.objects.create(nazov=f"1.A") #vytvorenie zaznamu v tabuľke tried
 for rocnik in range(1, 5):
-    for pismeno in ['A', 'B', 'C', 'D']:
+    for pismeno in ['A', 'B', 'C']:
         Trieda.objects.create(nazov=f"{rocnik}.{pismeno}")
 
-for meno in ["Ján","Adam","Jozef","Tomáš"]:
-    for priezvisko in ["Mrkvička","Šarlina","Šutek","Trnka"]:
-        Student.objects.create(meno=meno, priezvisko=priezvisko)
+triedy = Trieda.objects.all()
 
-for meno in ["Ján","Adam","Jozef","Tomáš"]:
-    for priezvisko in ["Mrkvička","šarlina","Šutek","Trnka"]:
-        titul = random.choice(["Mgr.","Ing.","PhDr."])
+fmena = open('mena.txt','r',encoding='utf8')
+mena = fmena.read().splitlines()
+
+fpriezviska = open('priezviska.txt','r',encoding='utf8')
+priezviska = fpriezviska.read().splitlines()
+
+pocet_tried = len(triedy)
+for i in range(24):
+    meno = random.choice(mena)
+    priezvisko = random.choice(priezviska)
+    titul = random.choice(['Mgr.', 'Ing.', 'PhDr.', 'PeaDr.',''])
+    if i < pocet_tried:
+        trieda = triedy[i]
+        Ucitel.objects.create(titul=titul, meno=meno, priezvisko=priezvisko, trieda=trieda)
+    else:
         Ucitel.objects.create(titul=titul, meno=meno, priezvisko=priezvisko)
+
+for i in range(240):
+    meno = random.choice(mena)
+    priezvisko = random.choice(priezviska)
+    trieda = random.choice(triedy)
+    Student.objects.create(meno=meno, priezvisko=priezvisko, trieda=trieda)
